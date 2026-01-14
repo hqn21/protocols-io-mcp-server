@@ -931,7 +931,7 @@ wheels = [
 
 [[package]]
 name = "protocols-io-mcp"
-version = "1.0.2"
+version = "1.0.3"
 source = { editable = "." }
 dependencies = [
     { name = "click" },
