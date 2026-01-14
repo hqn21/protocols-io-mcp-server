@@ -1,6 +1,6 @@
 [project]
 name = "protocols-io-mcp"
-version = "1.0.1"
+version = "1.0.2"
 authors = [
     { name="Hao-Quan Liu", email="contact@haoquan.me" }
 ]
