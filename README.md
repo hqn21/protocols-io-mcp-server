@@ -25,38 +25,50 @@ The server provides the following tools that can be used by MCP clients:
 ## Requirements
 
 - Python 3.10 or higher
-- protocols.io account with API access token
+- protocols.io account with API credentials
 - MCP client (such as Claude Desktop)
+
+### Obtain Protocols.io API Credentials
+
+1. Visit [protocols.io/developer](https://www.protocols.io/developers)
+2. Sign in to your account
+3. Navigate to the **API Clients** section
+4. Click **ADD CLIENT** to create a new application
+5. Copy the generated credentials:
+   - Client Access Token (for STDIO transport)
+   - Client ID and Client Secret (for HTTP/SSE transport)
 
 ## Installation
 
 ### Quick Start with Docker
 
 ```bash
-docker run -d -p 8000:8000 -e PROTOCOLS_IO_CLIENT_ACCESS_TOKEN="your_access_token_here" --name protocols-io-mcp --restart always ghcr.io/hqn21/protocols-io-mcp:latest
+docker run -d -p 8000:8000 -e PROTOCOLS_IO_CLIENT_ID="your_client_id" -e PROTOCOLS_IO_CLIENT_SECRET="your_client_secret" -e PROTOCOLS_IO_MCP_BASE_URL="https://example.com" --name protocols-io-mcp --restart always ghcr.io/hqn21/protocols-io-mcp:latest
 ```
 
-### Install the package using pip
+The server will be accessible at `http://0.0.0.0:8000/mcp` with HTTP transport
+
+### Install via pip
 
 ```bash
 pip install protocols-io-mcp
 ```
 
-## Configuration
+#### Set Environment Variables
 
-### Environment Variables
-
-Before running the server or tests, you must set your protocols.io API access token:
+##### STDIO Transport
 
 ```bash
 export PROTOCOLS_IO_CLIENT_ACCESS_TOKEN="your_client_access_token"
 ```
 
-To obtain an API token:
-1. Visit [protocols.io/developer](https://www.protocols.io/developers)
-2. Sign in to your account
-3. Go to API clients section and add a new client
-4. Copy the generated client access token and set it in your environment
+##### HTTP/SSE Transport
+
+```bash
+export PROTOCOLS_IO_CLIENT_ID="your_client_id"
+export PROTOCOLS_IO_CLIENT_SECRET="your_client_secret"
+export PROTOCOLS_IO_MCP_BASE_URL="https://example.com"
+```
 
 ## Usage
 
@@ -65,13 +77,13 @@ To obtain an API token:
 Run the MCP server with various transport options:
 
 ```bash
-# Default: stdio transport (recommended for MCP clients)
+# Default: STDIO transport
 protocols-io-mcp
 
 # HTTP transport
 protocols-io-mcp --transport http --host 127.0.0.1 --port 8000
 
-# Server-Sent Events transport
+# SSE transport
 protocols-io-mcp --transport sse --host 127.0.0.1 --port 8000
 ```
 
