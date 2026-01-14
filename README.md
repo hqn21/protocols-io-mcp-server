@@ -2,6 +2,10 @@
 
 A Model Context Protocol (MCP) server that enables MCP clients like Claude Desktop to interact with [protocols.io](https://www.protocols.io), a popular platform for sharing scientific protocols and methods.
 
+<a href="https://glama.ai/mcp/servers/@hqn21/protocols-io-mcp-server">
+  <img width="380" height="200" src="https://glama.ai/mcp/servers/@hqn21/protocols-io-mcp-server/badge" alt="protocols-io-mcp-server MCP server" />
+</a>
+
 ## Available Tools
 
 The server provides the following tools that can be used by MCP clients:
