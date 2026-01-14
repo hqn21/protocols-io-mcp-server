@@ -30,13 +30,15 @@ The server provides the following tools that can be used by MCP clients:
 
 ### Obtain Protocols.io API Credentials
 
-1. Visit [protocols.io/developer](https://www.protocols.io/developers)
+1. Visit [protocols.io/developers](https://www.protocols.io/developers)
 2. Sign in to your account
 3. Navigate to the **API Clients** section
 4. Click **ADD CLIENT** to create a new application
-5. Copy the generated credentials:
-   - Client Access Token (for STDIO transport)
-   - Client ID and Client Secret (for HTTP/SSE transport)
+5. Configure and copy the credentials based on your use case:
+   - **Client Access Token**: Copy the generated token for simple authentication (suitable for local STDIO transport)
+   - **Client ID** and **Client Secret**: For OAuth 2.0 authentication (suitable for remote HTTP/SSE transport):
+     - Set the redirect URL to `{your_mcp_base_url}/auth/callback`
+     - Copy the Client ID and Client Secret
 
 ## Installation
 
