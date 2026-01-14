@@ -3,18 +3,11 @@ import importlib
 from fastmcp import FastMCP
 from fastmcp.server.auth import OAuthProxy
 from fastmcp.server.auth.providers.debug import DebugTokenVerifier
-from protocols_io_mcp.utils import config
 from dotenv import load_dotenv
 load_dotenv()
 
-if config.TRANSPORT_TYPE == "stdio":
-    mcp = FastMCP(
-        name="protocols-io-mcp",
-        instructions="""
-            This server helps you interact with data from protocols.io.
-        """
-    )
-else:
+auth = None
+if {"PROTOCOLS_IO_CLIENT_ID", "PROTOCOLS_IO_CLIENT_SECRET", "PROTOCOLS_IO_MCP_BASE_URL"}.issubset(os.environ):
     auth = OAuthProxy(
         upstream_authorization_endpoint="https://www.protocols.io/api/v3/oauth/authorize",
         upstream_token_endpoint="https://www.protocols.io/api/v3/oauth/token",
@@ -26,11 +19,11 @@ else:
         forward_pkce=False,
         token_endpoint_auth_method="client_secret_post"
     )
-    mcp = FastMCP(
-        name="protocols-io-mcp",
-        instructions="""
-            This server helps you interact with data from protocols.io.
-        """,
-        auth=auth
-    )
+mcp = FastMCP(
+    name="protocols-io-mcp",
+    instructions="""
+        This server helps you interact with data from protocols.io.
+    """,
+    auth=auth
+)
 importlib.import_module('protocols_io_mcp.tools')
